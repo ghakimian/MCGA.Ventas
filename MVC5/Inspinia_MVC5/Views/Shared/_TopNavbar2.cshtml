@@ -1,10 +1,12 @@
-﻿<div class="row border-bottom white-bg">
+﻿@using Microsoft.AspNet.Identity
+
+<div class="row border-bottom white-bg">
     <nav class="navbar navbar-static-top" role="navigation">
         <div class="navbar-header">
             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                 <i class="fa fa-reorder"></i>
             </button>
-            <a href="#" class="navbar-brand">Inspinia</a>
+            <a href="#" class="navbar-brand">MCGA Ventas</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
@@ -12,50 +14,68 @@
                     <a aria-expanded="false" role="button" href="@Url.Action("Index", "Layouts")"> Back to main Layout page</a>
                 </li>
                 <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Clientes <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
+                        <li><a href="">Nuevo</a></li>
+                        <li><a href="">Listado</a></li>
+                        <li><a href="">Menu item 2</a></li>
+                        <li><a href="">Menu item 2</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Productos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="">Nuevo</a></li>
+                        <li><a href="">Listado</a></li>
                         <li><a href="">Menu item</a></li>
                         <li><a href="">Menu item</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Ventas <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
+                        <li><a href="">Nueva</a></li>
+                        <li><a href="">Listado</a></li>
                         <li><a href="">Menu item</a></li>
                         <li><a href="">Menu item</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Reportes <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
+                        <li><a href="">Reporte Ventas</a></li>
+                        <li><a href="">Reporte Productos</a></li>
                         <li><a href="">Menu item</a></li>
                         <li><a href="">Menu item</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
-                </li>
+               
+            </ul>
 
-            </ul>
+
+
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+
             <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-            </ul>
+        <li>
+            @Html.ActionLink("Hola, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Salir</a></li>
+    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+                              
         </div>
     </nav>
 </div>

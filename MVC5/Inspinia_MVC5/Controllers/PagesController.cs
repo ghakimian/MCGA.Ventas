@@ -10,6 +10,13 @@ namespace Inspinia_MVC5.Controllers
     public class PagesController : Controller
     {
 
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
         public ActionResult SearchResults()
         {
             return View();
